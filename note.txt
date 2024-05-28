@@ -1,0 +1,6 @@
+# To adapt the original buildspec.yaml for use in another project, you need to make the following changes:
+
+- Update ECR repository URI: Change the ECR repository URI in the build phase commands to match the desired repository for the second project.
+- Adjust Docker image tag: Modify the Docker image tag (-t) and the repository name in the docker tag command to suit the second project's requirements.
+- Modify AWS region: Ensure that the AWS region specified in the pre_build phase matches the region where your ECR repositories reside.
+- Optional: Customize any other commands or parameters as needed for your specific project requirements.

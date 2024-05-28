@@ -1,0 +1,32 @@
+# Updated buildspec.yaml
+
+version: 0.2
+phases:
+  # The 'pre_build' phase executes commands before the actual build process starts.
+  pre_build:
+    commands:
+      # Display a message indicating logging in to Amazon ECR.
+      - echo Logging in to Amazon ECR...
+      # Obtaining login password for Amazon ECR and logging in using Docker.
+      - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 123456789123.dkr.ecr.ap-south-1.amazonaws.com
+
+  # The 'build' phase executes the actual building of the Docker image.
+  build:
+    commands:
+      # Display a message indicating the start time of the build process.
+      - echo Build started on `date`
+      # Display a message indicating the beginning of the Docker image building process.
+      - echo Building the Docker image...
+      # Build the Docker image with the specified tag.
+      - docker build -t webserver:1 .
+      # Tag the Docker image with both 'latest' and the specified repository URI and tag.
+      - docker tag webserver:1 123456789123.dkr.ecr.ap-south-1.amazonaws.com/webserver1:latest
+
+  # The 'post_build' phase executes commands after the build process completes.
+  post_build:
+    commands:
+      # Display a message indicating the completion time of the build process.
+      - echo Build completed on `date`
+      # Push the built Docker image with the specified repository URI and tag to Amazon ECR.
+      - echo Pushing the Docker image...
+      - docker push 123456789123.dkr.ecr.ap-south-1.amazonaws.com/webserver1:latest
