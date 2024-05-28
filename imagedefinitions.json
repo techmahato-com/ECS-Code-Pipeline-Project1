@@ -1,0 +1,6 @@
+[
+    {
+        "name": "cicd-container-demo",
+        "imageUri": "123456789123.dkr.ecr.ap-south-1.amazonaws.com/webserver1:latest"
+    }
+]
